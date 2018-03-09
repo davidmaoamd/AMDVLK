@@ -8,10 +8,10 @@ RUN  mkdir drivers
 WORKDIR /amdvlk/drivers
 RUN  git clone https://github.com/GPUOpen-Drivers/AMDVLK.git -b master && git clone https://github.com/GPUOpen-Drivers/xgl.git -b master && git clone https://github.com/GPUOpen-Drivers/pal.git -b master && git clone https://github.com/GPUOpen-Drivers/llvm.git -b amd-vulkan-master
 WORKDIR /amdvlk/drivers/xgl
-RUN  cmake -H. -Bbuilds/Release64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$PWD/../pal/cmake/Modules -DXGL_PAL_PATH:PATH=$PWD/../pal -DCMAKE_C_FLAGS="-DLINUX -D__x86_64__ -D__AMD64__" -DCMAKE_CXX_FLAGS="-DLINUX -D__x86_64__ -D__AMD64__" -DXGL_LLVM_SRC_PATH=$PWD/../llvm
+RUN  cmake -H. -Bbuilds/Release64
 WORKDIR /amdvlk/drivers/xgl/builds/Release64
 RUN  make -j`nproc`
-WORKDIR /amdvlk/AMDVLK/docker/ubuntu
-RUN ./buildpkg.sh /amdvlk/AMDVLK  1.0.0 /amdvlk/drivers/xgl/build/Release64/icd/amdvlk64.so /amdvlk/AMDVLK/json/Ubuntu/amd_icd64.json && cp build/amdvlk_*.deb /amdvlk/AMDVLK/package/ubuntu/amdvlk64.deb
-WORKDIR /amdvlk/AMDVLK/package/ubuntu
+WORKDIR /amdvlk/drivers/AMDVLK/docker/ubuntu
+RUN ./buildpkg.sh /amdvlk/drivers/AMDVLK  1.0.0 /amdvlk/drivers/xgl/build/Release64/icd/amdvlk64.so /amdvlk/drivers/AMDVLK/json/Ubuntu/amd_icd64.json && cp build/amdvlk_*.deb /amdvlk/drivers/AMDVLK/package/ubuntu/amdvlk64.deb
+WORKDIR /amdvlk/drivers/AMDVLK/package/ubuntu
 RUN git add amdvlk64.deb && git commit -sm "update the package upon latest update" && git push 
