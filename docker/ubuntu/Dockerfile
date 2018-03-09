@@ -14,4 +14,5 @@ RUN  make -j`nproc`
 WORKDIR /amdvlk/drivers/AMDVLK/docker/ubuntu
 RUN ./buildpkg.sh /amdvlk/drivers/AMDVLK  1.0.0 /amdvlk/drivers/xgl/build/Release64/icd/amdvlk64.so /amdvlk/drivers/AMDVLK/json/Ubuntu/amd_icd64.json && cp build/amdvlk_*.deb /amdvlk/drivers/AMDVLK/package/ubuntu/amdvlk64.deb
 WORKDIR /amdvlk/drivers/AMDVLK/package/ubuntu
-RUN git add amdvlk64.deb && git commit -sm "update the package upon latest update" && git push 
+RUN git config --global push.default simple 
+RUN git add amdvlk64.deb && git commit -sm "update the package upon latest update" && git push origin 
