@@ -6,7 +6,7 @@ RUN  update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 RUN  git config --global user.email "david.mao@amd.com" && git config --global user.name "David Mao" && git config --global color.ui false
 RUN  mkdir drivers
 WORKDIR /amdvlk/drivers
-RUN  git clone https://github.com/GPUOpen-Drivers/AMDVLK.git -b master && git clone https://github.com/GPUOpen-Drivers/xgl.git -b master && git clone https://github.com/GPUOpen-Drivers/pal.git -b master && git clone https://github.com/GPUOpen-Drivers/llvm.git -b amd-vulkan-master
+RUN  git clone https://github.com/davidmaoamd/AMDVLK.git -b master && git clone https://github.com/GPUOpen-Drivers/xgl.git -b master && git clone https://github.com/GPUOpen-Drivers/pal.git -b master && git clone https://github.com/GPUOpen-Drivers/llvm.git -b amd-vulkan-master
 WORKDIR /amdvlk/drivers/xgl
 RUN  cmake -H. -Bbuilds/Release64
 WORKDIR /amdvlk/drivers/xgl/builds/Release64
